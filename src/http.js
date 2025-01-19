@@ -21,6 +21,7 @@ export async function fetchUserPlaces() {
 }
 
 export async function UpdateUserPlaces(places) {
+  debugger;
   const response = await fetch(
     "https://tourist-backend-zeta.vercel.app/user-places",
     {

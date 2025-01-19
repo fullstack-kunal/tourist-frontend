@@ -9,7 +9,6 @@ import { UpdateUserPlaces, fetchUserPlaces } from "./http.js";
 import Error from "./components/Error.jsx";
 function App() {
   const selectedPlace = useRef();
-  const focusRef = useRef();
   const [userPlaces, setUserPlaces] = useState([]);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [errorUpdatingPlaces, setErrorUpdatingPlaces] = useState();
@@ -49,6 +48,7 @@ function App() {
     try {
       await UpdateUserPlaces([...userPlaces, selectedPlace]);
     } catch (error) {
+      console.log(error, "hjbfksbhfba");
       setUserPlaces(userPlaces);
       setErrorUpdatingPlaces({
         message: error.message || "Failed to Remove the Places",
@@ -87,8 +87,6 @@ function App() {
   const handleErrorRemove = () => {
     setErrorRemovingPlaces(null);
   };
-  console.log(userPlaces, "userPlaces");
-  const [name, setName] = useState("");
   return (
     <>
       <Modal open={errorUpdatingPlaces} onClose={handleError}>
@@ -115,14 +113,6 @@ function App() {
           onConfirm={handleRemovePlace}
         />
       </Modal>
-
-      <input
-        ref={focusRef}
-        value={name}
-        onChange={(e) => {
-          setName(e.target.value);
-        }}
-      />
 
       <header>
         <img src={logoImg} alt="Stylized globe" />
